@@ -1,0 +1,53 @@
+<%- layout("/layouts/boilerplate") %>
+<body>
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <br>
+
+            <h3>Create New Listing</h3>
+            <hr>
+            <form action="/listings" method="post" novalidate class="needs-validation">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title :</label>
+                    <input type="text" id="title" class="form-control" placeholder="Enter title" name="listing[title]" >
+                    <div class="invalid-feedback">Title should be valid</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label" >Location :</label>
+                    <input type="text" id="location" class="form-control" placeholder="Enter Location" name="listing[location]" >
+                    <div class="invalid-feedback">Location should be valid</div>
+                </div>
+
+                <div class="row">
+                        <div class="mb-3 col-4">
+                            <label for="price" class="form-label" >Price :</label>
+                            <input type="text" id="price" class="form-control" placeholder="Enter Price" name="listing[price]" >
+                            <div class="invalid-feedback">Price should be valid</div>
+                        </div>
+
+                        <div class="mb-3 col-8">
+                            <label for="country" class="form-label" >Country :</label>
+                            <input type="text" id="country" class="form-control" placeholder="Enter Country" name="listing[country]" >
+                            <div class="invalid-feedback">Country name should be valid</div>
+                        </div>
+                </div>
+                
+
+                <div class="mb-3">
+                    <label for="desc" class="form-label" >Description : </label>
+                    <textarea name="listing[description]" class="form-control" placeholder="Enter Description" id="desc" cols="40" rows="6" ></textarea>
+                    <div class="invalid-feedback">Description should be valid</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label" >Add Image :</label></b>
+                    <input type="text" id="image" class="form-control" placeholder="Enter image URL" name="listing[image][url]" >
+                    <div class="invalid-feedback">Image URL should be valid</div>
+                </div>
+                <button class="btn btn-dark add-btn">ADD</button>
+             </form>
+        </div>
+    </div>   
+</body>

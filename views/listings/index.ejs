@@ -1,0 +1,24 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <div class="row row-cols-lg-3" style="display: flex; flex-direction: row; justify-content: space-evenly;">
+        <% for(listing of listings){ %>
+            <a href="/listings/<%= listing._id %>" class="card-link">
+                 <div class="card">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="image not found" height="250rem">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-body" >
+                        <h5 class="card-title"><b><%=listing.title%></b></h5>
+                        <p class="card-text">
+                        <%=listing.country%> 
+                        <br>
+                        ₹<%= listing.price.toLocaleString("en-IN") %>/night
+                        </p>
+                    </div>
+                 </div>
+            </a>   
+        <% } %>   
+    </div>
+</body>

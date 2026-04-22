@@ -1,0 +1,112 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Apple style typography */
+
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: black;
+    color:white;
+    min-height:100vh;
+}
+
+/* Title */
+
+.title{
+    font-family:  -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-align:center;
+    font-size:48px;
+    font-weight:600;
+    margin:50px 0;
+    letter-spacing:-1px;
+    color:white;
+}
+
+/* Grid layout */
+
+.listing-container{
+    width:88%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:35px;
+    padding-bottom:60px;
+}
+
+/* Minimal luxury card */
+
+.card{
+    background:#ffffff;
+    border-radius:18px;
+    overflow:hidden;
+    transition:all 0.35s ease;
+    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+}
+
+/* Smooth Apple-style hover */
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.35);
+}
+
+/* Image */
+
+.card-img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    transition:transform 0.5s ease;
+}
+
+.card:hover .card-img{
+    transform:scale(1.05);
+}
+
+/* Card content */
+
+.card-body{
+    padding:18px;
+    color:#1d1d1f;
+}
+
+/* Title inside card */
+
+.card-body h2{
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+/* Description */
+
+.desc{
+    color:#6e6e73;
+    font-family: -apple-system;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+/* Price */
+
+.price{
+    font-weight:600;
+    font-family: -apple-system;
+    font-size:17px;
+    color:#000;
+    margin-bottom:6px;
+}
+
+/* Location */
+
+.location{
+    font-size:13px;
+    color:#86868b;
+}
+
+.card-link{
+    text-decoration: none;
+}

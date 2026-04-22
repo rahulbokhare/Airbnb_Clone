@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Listings</title>
+    <link rel="stylesheet" href="../public/style.css">
+</head>
+<body>
+
+    <h1 class="title">All Listings</h1>
+
+    <div class="listing-container">
+
+        <% for(let listing of listings){ %>
+            <a href="/listings/<%= listing._id %>" class="card-link">
+
+            <div class="card">
+
+                <img 
+                    src="<%= listing.image.url %>" 
+                    alt="listing image"
+                    class="card-img"
+                >
+
+                <div class="card-body">
+
+                    <h2><%= listing.title %></h2>
+
+                    <p class="desc">
+                        <%= listing.description %>
+                    </p>
+
+                    <p class="price">
+                        ₹ <%= listing.price %> / night
+                    </p>
+
+                    <p class="location">
+                        <%= listing.location %>, <%= listing.country %>
+                    </p>
+
+                </div>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</body>
+</html>
