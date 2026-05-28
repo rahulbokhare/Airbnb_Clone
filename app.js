@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const  mongoose = require("mongoose");
-const Listing = require("./models/listing.js");
+const Listing = require("./models/listing.js");//listing from another file
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -26,7 +26,6 @@ const validateListing = (req, res, next) => {
             }
 }
 
-
 main()
 .catch((err) => {
     console.log(err)
@@ -39,11 +38,13 @@ async function main() {
 //Index Route
 app.get("/",(req, res) =>{
     res.send("hii I'm root");
-});
+})
+
 
 app.get("/listings",async(req, res) => {
     let listings = await Listing.find();
     res.render("listings/index.ejs", { listings })
+    
 });
 
 //Create Route
@@ -91,14 +92,12 @@ app.delete("/listings/:id", wrapAsync(async(req,res) => {
         await Listing.findByIdAndDelete(id);
         res.redirect("/listings");
         console.log("listing deleted successfully");
-    
 }));
 
 app.use((err, req, res, next) => {
     let { status = 500, message = "Some Error Occurred" } = err;
     res.render("error.ejs", { err })
 })
-
 
 app.listen(8080,() => {
     console.log("sarver is listening");
