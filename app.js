@@ -20,7 +20,7 @@ const validateListing = (req, res, next) => {
      let {error} = listingSchema.validate(req.body);
             console.log(error);
             if(error){
-                throw new expressError(400, error);
+                throw new expressError(400, error.details.map(el => el.message).join(", "));
             }else{
                 next();
             }
@@ -94,11 +94,15 @@ app.delete("/listings/:id", wrapAsync(async(req,res) => {
         console.log("listing deleted successfully");
 }));
 
+app.use((req, res, next) => {
+    next(new expressError(404, "page not found"))
+})
+
 app.use((err, req, res, next) => {
     let { status = 500, message = "Some Error Occurred" } = err;
-    res.render("error.ejs", { err })
+    res.status(status).render("error.ejs", { err })
 })
 
 app.listen(8080,() => {
-    console.log("sarver is listening");
+    console.log("server is listening");
 });

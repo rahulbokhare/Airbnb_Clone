@@ -1,9 +1,25 @@
 <% layout ("/layouts/boilerplate") %>
 
-<div class="row">
-    <div class="alert alert-danger col-6 mt-4 offset-3" role="alert">
-       <!--  something went wrong!! Please try again later. -->
-         <%= err.message %>
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="card shadow-lg border-0 rounded-4 p-4 text-center" style="max-width: 500px;">
+        
+        <!-- Icon -->
+        <div class="mb-3">
+            <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 3rem;"></i>
+        </div>
+
+        <!-- Title -->
+        <h3 class="fw-bold text-danger">Oops! Something went wrong</h3>
+
+        <!-- Message -->
+        <p class="text-muted mt-2">
+            <%= err.message %>
+        </p>
+
+        <!-- Button -->
+        <a href="/listings" class="btn btn-dark mt-3 px-4 rounded-pill">
+            Go Back Home
+        </a>
 
     </div>
 </div>
