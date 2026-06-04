@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const  mongoose = require("mongoose");
+
+const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");//listing from another file
 const path = require("path");
 const methodOverride = require("method-override");
@@ -10,7 +11,9 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const {listingSchema} = require("./schema.js");
 
 app.set("views",path.join(__dirname,"views"));
+
 app.set("view engine","ejs");
+
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({ extended : true}));
 app.use(methodOverride("_method"));
