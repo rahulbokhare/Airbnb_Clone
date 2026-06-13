@@ -1,9 +1,10 @@
 <% layout("/layouts/boilerplate") %>
-<body>
+
+
     <div class="row row-cols-lg-3" style="display: flex; flex-direction: row; justify-content: space-evenly;">
         <% for(listing of listings){ %>
             <a href="/listings/<%= listing._id %>" class="card-link">
-                 <div class="card">
+                 <div class=" card listing-card">
                     <img src="<%= listing.image.url %>" class="card-img-top" alt="image not found" height="250rem">
                     <div class="card-img-overlay">
                         <h5 class="card-title"></h5>
@@ -21,6 +22,5 @@
             </a>   
         <% } %>   
     </div>
-</body>
 
 
