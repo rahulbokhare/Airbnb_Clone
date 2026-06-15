@@ -18,8 +18,6 @@ const validateListing = (req, res, next) => {
             }
 }
 
-
-
 //Index route
 router.get("/",async(req, res) => {
     let listings = await Listing.find();
@@ -29,6 +27,10 @@ router.get("/",async(req, res) => {
 
 //Create Route
 router.get("/new", wrapAsync(async(req,res) => {
+    if(!req.isAuthenticated()){
+        req.flash("error", "please login to continue");
+        return res.redirect("/login")
+    }
     res.render("listings/new.ejs");
 }));
 

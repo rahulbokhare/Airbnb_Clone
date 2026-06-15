@@ -1,21 +1,29 @@
 const express = require("express");
 const app = express();
-
 const mongoose = require("mongoose");
-const Listing = require("./models/listing.js");//listing from another file
-const Review = require("./models/review.js");
 const path = require("path");
-
 const methodOverride = require("method-override");//for edit and delete
 const ejsMate = require("ejs-mate");
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+
+
+
+
+const Listing = require("./models/listing.js");//listing from another file
+const Review = require("./models/review.js");
+const User = require("./models/user.js")
+
 const expressError = require("./utils/expressError");
 const wrapAsync = require("./utils/wrapAsync.js");
 const { listingSchema , reviewSchema } = require("./schema.js");
-const session = require("express-session");
-const flash = require("connect-flash");
 
-const listing = require("./routes/listing.js");
-const review = require("./routes/review.js")
+
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js")
+const UserRouter = require("./routes/user.js");
 
 
 app.set("views",path.join(__dirname,"views"));
@@ -45,6 +53,14 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize())
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 
 
 app.use((req, res, next) => {
@@ -55,8 +71,9 @@ app.use((req, res, next) => {
 })
 
 
-app.use("/listings", listing);
-app.use("/listings/:id/reviews", review);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", UserRouter);
 
 
 
