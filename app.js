@@ -9,16 +9,13 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
-
-
-
 const Listing = require("./models/listing.js");//listing from another file
 const Review = require("./models/review.js");
 const User = require("./models/user.js")
+const { listingSchema , reviewSchema } = require("./schema.js");
 
 const expressError = require("./utils/expressError");
 const wrapAsync = require("./utils/wrapAsync.js");
-const { listingSchema , reviewSchema } = require("./schema.js");
 
 
 const listingRouter = require("./routes/listing.js");
@@ -86,6 +83,9 @@ app.use((err, req, res, next) => {
     res.status(status).render("error.ejs", { err })
 })
 
-app.listen(443,() => {
-    console.log(`server is listening port ${443}`);
+
+
+const port = 8080;
+app.listen(port,() => {
+    console.log(`server is listening port ${port}`);
 });

@@ -5,6 +5,7 @@ const expressError = require("../utils/expressError");
 const wrapAsync = require("../utils/wrapAsync.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
+const { isLoggedIn } = require("../middleware.js");
 
 
 
@@ -26,11 +27,7 @@ router.get("/",async(req, res) => {
 });
 
 //Create Route
-router.get("/new", wrapAsync(async(req,res) => {
-    if(!req.isAuthenticated()){
-        req.flash("error", "please login to continue");
-        return res.redirect("/login")
-    }
+router.get("/new", isLoggedIn, wrapAsync(async(req,res) => {
     res.render("listings/new.ejs");
 }));
 
@@ -57,7 +54,7 @@ router.get("/:id", wrapAsync(async (req,res) => {
 
 // UPDATE ROUTE
 //Edit Route
-router.get("/:id/edit", wrapAsync(async(req,res) => {
+router.get("/:id/edit", isLoggedIn, wrapAsync(async(req,res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
     if(!listing){
@@ -76,7 +73,7 @@ router.put("/:id", wrapAsync(async(req, res) => {
 
 
 //Delete route
-router.delete("/:id", wrapAsync(async(req,res) => {
+router.delete("/:id", isLoggedIn, wrapAsync(async(req,res) => {
         let {id} = req.params;
         await Listing.findByIdAndDelete(id);
         req.flash("success","listing deleted successfully");
