@@ -1,0 +1,58 @@
+const Listing = require("../models/listing");
+
+
+module.exports.index = async(req, res) => {
+    let listings = await Listing.find();
+    res.render("listings/index.ejs", { listings })
+    
+}
+
+module.exports.createGet = async(req,res) => {
+    res.render("listings/new.ejs");
+}
+
+module.exports.createPost = async(req, res, next) => {
+            const newListing = new Listing(req.body.listing);
+            newListing.owner = req.user._id;
+            await newListing.save();
+            console.log(newListing);
+            req.flash("success","New Listing Created");
+            return res.redirect("/listings");
+            console.log("listing done successfully");   
+}
+
+module.exports.showRoute = async (req,res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id).populate({path : "reviews" , populate :{path : "author"}}).populate("owner");
+    if(!listing){
+        req.flash("error","Listing you are searching for does not exist");
+        return res.redirect("/listings");
+    }
+    res.render("listings/show.ejs", { listing });
+}
+
+module.exports.editGet = async(req,res) => {
+    let { id } = req.params;
+    let listing = await Listing.findById(id);
+    if(!listing){
+        req.flash("error","Listing you are searching for does not exist");
+        return res.redirect("/listings");
+    }
+    res.render("listings/edit.ejs", { listing });
+}
+
+module.exports.editPut = async(req, res) => {
+    let {id} = req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    req.flash("success","listing updated successfully");
+    res.redirect(`/listings/${id}`);
+    console.log("updated successfully");
+}
+
+module.exports.deleteRoute = async(req,res) => {
+        let {id} = req.params;
+        await Listing.findByIdAndDelete(id);
+        req.flash("success","listing deleted successfully");
+        res.redirect("/listings");
+        console.log("listing deleted successfully");
+}
