@@ -34,8 +34,7 @@ module.exports.loginPost = async(req, res ) => {
         req.flash("success", "welcome to the wanderlust");
         let redirectUrl = res.locals.redirectUrl || "/listings";
         console.log(redirectUrl)
-        return res.redirect(redirectUrl);
-        
+        return res.redirect(redirectUrl);      
 }
 
 module.exports.logoutRoute = (req, res, next) => {

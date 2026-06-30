@@ -16,7 +16,10 @@ router.route("/signup")
 //login
 router.route("/login")
 .get(wrapAsync(userController.loginGet))
-.post(saveRedirectUrl,passport.authenticate("local", {failureRedirect : "/login" , failureFlash: true}));
+.post( (req,res,next)=> {
+    console.log("reached login url");
+    next();
+}, saveRedirectUrl,passport.authenticate("local", {failureRedirect : "/login" , failureFlash: true}), wrapAsync(userController.loginPost));
 
 //logout Route
 router.get("/logout" , userController.logoutRoute)
